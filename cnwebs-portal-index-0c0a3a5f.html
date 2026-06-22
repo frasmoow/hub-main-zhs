@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayx · 一眼看懂的事</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: #f5f3ef;
+            color: #1d1d1f;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 深色头图 —— 故事开场 */
+        .hero {
+            background: linear-gradient(145deg, #0e1218 0%, #1a202c 60%, #0f141a 100%);
+            color: #e7e9ed;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid #2d333f;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to top, #f5f3ef, transparent);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.6rem;
+            color: #f0f2f5;
+        }
+
+        .hero .sub {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #9aa3b5;
+            max-width: 660px;
+            margin: 0 auto 1.6rem;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(2px);
+            padding: 0.5rem 1.6rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
+            color: #cbd2e0;
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 2.8rem 2rem 4rem;
+            flex: 1;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 2.6rem;
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            padding: 2rem 2.2rem;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+            border: 1px solid #eae8e2;
+        }
+
+        .intro-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .intro-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 特点列表 —— 卡片式，差异化的网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.4rem;
+            margin: 2.8rem 0 2.2rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.4rem;
+            border: 1px solid #e2ded7;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #b7ada1;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #2b2b2e;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #4a4a4f;
+            line-height: 1.5;
+        }
+
+        .feature-card .icon {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #a5593c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #7d3f28;
+            border-bottom-color: #b8856b;
+        }
+
+        .inline-link {
+            background: #f0ebe5;
+            padding: 0.1rem 0.3rem;
+            border-radius: 6px;
+            border-bottom: none;
+        }
+
+        .inline-link:hover {
+            background: #e4dcd2;
+            border-bottom: none;
+        }
+
+        /* 温和结尾 + 实用提示 */
+        .closing-note {
+            margin-top: 3.2rem;
+            padding: 1.6rem 2rem;
+            background: #efeae2;
+            border-radius: 20px;
+            border-left: 6px solid #a5593c;
+            font-size: 0.98rem;
+            color: #2e2b27;
+        }
+
+        .closing-note strong {
+            color: #362f29;
+        }
+
+        .faq-mini {
+            margin-top: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: #ffffffdb;
+            backdrop-filter: blur(2px);
+            padding: 1.2rem 1.6rem;
+            border-radius: 16px;
+            border: 1px solid #ddd8cf;
+        }
+
+        .faq-item .q {
+            font-weight: 500;
+            color: #25221e;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-item .a {
+            font-size: 0.92rem;
+            color: #4b4741;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem 2.5rem;
+            font-size: 0.85rem;
+            color: #7a756e;
+            border-top: 1px solid #e0dbd2;
+            margin-top: 2rem;
+            background: #f5f3ef;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .hero { padding: 4rem 1.5rem 3.6rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero .sub { font-size: 1rem; }
+            .container { padding: 1.6rem 1rem 3rem; }
+            .intro-text { padding: 1.4rem 1.2rem; }
+            .features-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .closing-note { padding: 1.2rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 · 开场短句 -->
+    <header class="hero">
+        <h1>打开一个站点，先问“它用来干嘛”</h1>
+        <p class="sub">与其被各种入口晃花眼，不如直接看明白——这是一个帮你整理、跳转、串联常用网络服务的页面。</p>
+        <span class="tagline">· 快捷 · 直白 · 不绕路 ·</span>
+    </header>
+
+    <main class="container">
+
+        <!-- 承接段落：从用户识别用途的角度 -->
+        <div class="intro-text">
+            <p>你大概也遇到过这种情况：收藏夹里一堆链接，要用的时候反倒找不到。或者打开一个新网址，得花半分钟判断它到底是做什么的。</p>
+            <p><strong>cnwebs‑portal‑ayx.com</strong> 就是那种你扫一眼就能明白的站点。它把常用的网络工具、信息版块、服务入口集中在一个干净的页面上，你不需要猜，也不需要记。想找什么，顺着版块看过去就行。</p>
+            <p>而这个页面最核心的代号，就是 <a href="https://cnwebs-portal-ayx.com" class="inline-link">ayx</a> 。它不是一个浮夸的名字，只是这个入口的标识——你记住它，下次再来就不用翻历史记录。</p>
+        </div>
+
+        <!-- 特点列表 -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">📌</span>
+                <h3>一眼归类</h3>
+                <p>所有版块按使用场景排列，不靠猜，不靠试。从资讯到工具，从导航到本地服务，逻辑清晰。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🔗</span>
+                <h3>直接跳转</h3>
+                <p>没有多余中间页。每个链接都指向你真正要去的地方，节省每一次点击的犹豫。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🧭</span>
+                <h3>常换常新</h3>
+                <p>站点内容会跟随实用性调整，不会堆砌僵尸链接。你看到的，都是最近用得上的。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">📱</span>
+                <h3>多端顺手</h3>
+                <p>无论你在电脑前，还是路上掏出手机，页面都自动适配，不用放大缩小。</p>
+            </div>
+        </div>
+
+        <!-- 温和结尾 + FAQ 摘要 -->
+        <div class="closing-note">
+            <strong>🧩 一点实在的建议：</strong> 你不需要记下整个站点的结构。下次想快速找个常用页面，心里默念 <a href="https://cnwebs-portal-ayx.com">ayx</a> 就好。打开它，扫一眼，点走。事情办完，页面关掉，不拖泥带水。
+        </div>
+
+        <div class="faq-mini">
+            <div class="faq-item">
+                <div class="q">❓ 这个站点跟其他导航站有什么不一样？</div>
+                <div class="a">这里没有广告横幅、没有推荐排名、没有诱导点击。每个链接都基于实际用途放置，你看到的就是你需要的。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">❓ 我每次都要输入那一长串网址吗？</div>
+                <div class="a">不用。你只要记住 <a href="https://cnwebs-portal-ayx.com">ayx</a> 这个词，把它放进浏览器收藏夹，或者直接在地址栏输入前缀就能补全。</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <span>cnwebs‑portal‑ayx.com · 一个不装样子的入口</span>
+    </footer>
+
+</body>
+</html>
